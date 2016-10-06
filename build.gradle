@@ -289,27 +289,6 @@ project(":tests:gdx-tests-gwt") {
     }
 }
 
-project(":tests:gdx-tests-iosrobovm") {
-    apply plugin: "robovm"
-    dependencies {
-        compile project(":tests:gdx-tests")
-        compile project(":backends:gdx-backend-robovm")
-    }
-
-    eclipse.project {
-        natures 'org.robovm.eclipse.RoboVMNature'
-    }
-}
-
-project("tests:gdx-tests-ios-intel") {
-    dependencies {
-        compile project(":tests:gdx-tests")
-        //compile project(":backends:gdx-backend-moe")
-        compile "com.badlogicgames.gdx:gdx-backend-moe:$gdxVersion"
-        //natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
-    }
-}
-
 project(":tests:gdx-tests-jglfw") {
     dependencies {
         compile project(":tests:gdx-tests")

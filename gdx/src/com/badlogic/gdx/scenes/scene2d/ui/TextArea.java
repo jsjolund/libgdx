@@ -76,20 +76,24 @@ public class TextArea extends TextField {
 		linesShowing = 0;
 	}
 
+	// HERE
 	protected int letterUnderCursor (float x) {
+		System.out.println(x);
 		if (linesBreak.size > 0) {
 			if (cursorLine * 2 >= linesBreak.size) {
 				return text.length();
 			} else {
 				float[] glyphPositions = this.glyphPositions.items;
+				System.out.println(glyphPositions.toString());
 				int start = linesBreak.items[cursorLine * 2];
 				x += glyphPositions[start];
 				int end = linesBreak.items[cursorLine * 2 + 1];
 				int i = start;
-				for (; i <= end; i++)
-					if (glyphPositions[i] > x) break;
-				if (glyphPositions[i] - x <= x - glyphPositions[i - 1]) return i;
-				return Math.max(0, i - 1);
+				for (; i < end; i++)
+					if (glyphPositions[i] > x) break; //iterate until a position right of the glyph has been found
+				if (glyphPositions[i] - x <= x - glyphPositions[i - 1])
+					return i; //TODO: determine this special case
+				return Math.max(0, i - 1); //return edge of window or glyph before last iterated item
 			}
 		} else {
 			return 0;
